@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6efbed, #643e93);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            width: 400px;
+            max-width: 100%;
+            padding: 30px 20px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .login-header p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 16px;
+            color: #999;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            outline: none;
+            background: transparent;
+        }
+
+        .form-group input:focus ~ label,
+        .form-group input:valid ~ label {
+            top: -20px;
+            font-size: 12px;
+            color: #5e72e4;
+        }
+
+        .form-group input:focus {
+            border-bottom: 2px solid #5e72e4;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 5px;
+        }
+
+        .forgot-password a {
+            color: #5e72e4;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            height: 45px;
+            background: linear-gradient(to right, #5e72e4, #825ee4);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #4d61c9, #7149d1);
+            box-shadow: 0 5px 15px rgba(94, 114, 228, 0.4);
+        }
+
+        .signup-link {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .signup-link a {
+            color: #5e72e4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Media queries for better responsiveness */
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .login-header h1 {
+                font-size: 24px;
+            }
+
+            .login-header p {
+                font-size: 13px;
+            }
+
+            .form-group label {
+                font-size: 15px;
+            }
+
+            .form-group input {
+                font-size: 15px;
+            }
+
+            .remember-forgot {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .social-icon {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-header">
+            <h1><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%">
+                <!-- Background gradient -->
+                <defs>
+                  <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#0B0B3B" />
+                    <stop offset="100%" stop-color="#1A1A5A" />
+                  </linearGradient>
+                  
+                  <!-- Star glow -->
+                  <filter id="glow" height="300%" width="300%" x="-100%" y="-100%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                
+                <!-- Main background -->
+                <rect width="500" height="300" fill="url(#bgGradient)" rx="15" ry="15" />
+                
+                <!-- Decorative cosmic elements -->
+                <circle cx="120" cy="230" r="70" fill="#13136b" opacity="0.5" />
+                <circle cx="400" cy="80" r="50" fill="#13136b" opacity="0.5" />
+                
+                <!-- Stars -->
+                <circle cx="150" cy="70" r="2" fill="white" filter="url(#glow)" />
+                <circle cx="280" cy="50" r="1.5" fill="white" filter="url(#glow)" />
+                <circle cx="380" cy="180" r="2" fill="white" filter="url(#glow)" />
+                <circle cx="90" cy="150" r="1.5" fill="white" filter="url(#glow)" />
+                <circle cx="420" cy="240" r="2" fill="white" filter="url(#glow)" />
+                <circle cx="210" cy="270" r="1.5" fill="white" filter="url(#glow)" />
+                <circle cx="340" cy="120" r="1.5" fill="white" filter="url(#glow)" />
+                
+                <!-- Shooting star -->
+                <path d="M50,40 L80,60" stroke="white" stroke-width="1.5" filter="url(#glow)" />
+                
+                <!-- Planet with ring -->
+                <circle cx="440" cy="170" r="15" fill="#6a50c7" />
+                <ellipse cx="440" cy="170" rx="25" ry="5" fill="none" stroke="#9e7af5" stroke-width="1.5" />
+                
+                <!-- Main text "COSMICZ" -->
+                <text x="250" y="160" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#ffffff">COSMICZ</text>
+                
+                <!-- Tagline -->
+                <text x="250" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#a8a8ff">EXPLORE THE UNIVERSE OF STYLE</text>
+              </svg></h1>
+            <p>Please login to continue</p>
+        </div>
+        <form id="login-form">
+            <div class="form-group">
+                <input type="text" id="username" required>
+                <label for="username">Username or Email</label>
+                <div class="error-message" id="username-error"></div>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" required>
+                <label for="password">Password</label>
+                <div class="error-message" id="password-error"></div>
+            </div>
+            <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="signup-link">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+            <div class="social-login">
+                <p>Or login with</p>
+                <div class="social-icons">
+                    <div class="social-icon">G</div>
+                    <div class="social-icon">f</div>
+                    <div class="social-icon">in</div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Reset error messages
+            document.getElementById('username-error').style.display = 'none';
+            document.getElementById('password-error').style.display = 'none';
+            
+            // Get input values
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            // Simple validation
+            let isValid = true;
+            
+            if (username === '') {
+                document.getElementById('username-error').textContent = 'Username or email is required';
+                document.getElementById('username-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (password === '') {
+                document.getElementById('password-error').textContent = 'Password is required';
+                document.getElementById('password-error').style.display = 'block';
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById('password-error').textContent = 'Password must be at least 6 characters';
+                document.getElementById('password-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Here you would typically send the data to your server
+                console.log('Login attempt:', { username, password });
+                alert('Login successful! (This is just a demo)');
+            }
+        });
+    </script>
+</body>
+</html>
